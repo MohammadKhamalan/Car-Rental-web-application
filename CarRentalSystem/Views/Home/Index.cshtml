@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Car>
+
+@{
+    ViewData["Title"] = "Available Cars";
+}
+
+<h2>Welcome, @Context.Session.GetString("UserName")!</h2>
+
+
+<form asp-action="SearchForCar" method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="word" class="form-control" placeholder="Search cars...">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="row">
+    @foreach (var car in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="@car.ImageUrl" class="card-img-top" alt="@car.Make @car.Model">
+                <div class="card-body">
+                    <h5 class="card-title">@car.Year @car.Make @car.Model</h5>
+                    <p class="card-text">@car.Description</p>
+          
+                    <a href="#" class="btn btn-primary">Rent Now</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<div class="mt-4">
+    <a asp-controller="Account" asp-action="SignOut" class="btn btn-secondary">Sign Out</a>
+</div>
